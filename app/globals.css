@@ -2,32 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  font-family: "Poppins", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --radius: 0.5rem;
+  }
+}
+:root {
+  --primary-100: #ff553e;
+  --primary-200: #e8452c;
+  --primary-300: #d13f2a;
+  --primary-400: #b93a28;
+  --primary-500: #a13426;
+}
+.container {
+  width: 100%;
+  max-width: 1380px;
+  padding-right: 100px;
+  padding-left: 100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.bg-one {
+  background-image: url("../public/images/bg-container/first.svg");
+  background-repeat: repeat; /* Ensures the pattern repeats */
+}
+.bg-second {
+  background-image: url("../public/images/bg-container/second.svg");
+  background-repeat: repeat; /* Ensures the pattern repeats */
+}
+.bg-third {
+  background-image: url("../public/images/bg-container/third.svg");
+  background-repeat: repeat; /* Ensures the pattern repeats */
+}
+.bg-fourth {
+  background-image: url("../public/images/bg-container/fourth.svg");
+  background-repeat: repeat; /* Ensures the pattern repeats */
+}
+.button {
+  cursor: pointer;
+  background-color: var(--primary-100);
+  color: white;
+  border-radius: 30px;
+}
+button:hover {
+  background-color: var(--primary-200);
+}
+.button2 {
+  cursor: pointer;
+  background-color: #9333ea;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.button2:hover {
+  background-color: #7a2cbf;
+}
+@media screen and (max-width: 1080px) {
+  .container {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
+@media screen and (max-width: 740px) {
+  .container {
+    padding-right: 50px;
+    padding-left: 50px;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@media screen and (max-width: 546px) {
+  .container {
+    padding-right: 10px;
+    padding-left: 10px;
   }
 }
