@@ -2,7 +2,7 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 //const API_URL = "https://saas-express-js.vercel.app/api/auth";
-const API_URL = "http://localhost:3001/api/auth";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/auth`;
 const getAccessToken = () => {
   return cookies().get("token")?.value;
 };

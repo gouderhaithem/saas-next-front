@@ -51,7 +51,7 @@ const MergePdf = () => {
             };
 
             const token = getTokenFromCookies();
-            const response = await axios.post("http://localhost:3001/client/pdf/merge", formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/client/pdf/merge`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
 

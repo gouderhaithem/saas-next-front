@@ -76,7 +76,8 @@ const CreditSection = () => {
                         </ul>
                         <Button
                             className="mt-4 w-full button2"
-                            onClick={() => handlePurchase("Medium")}
+                            onClick={() => userCtx?.authRedirect(() => handlePurchase("Medium"))}
+
                             disabled={loading === "Medium"}
                         >
                             {loading === "Medium" ? "Processing..." : "Subscribe now"}
@@ -97,7 +98,8 @@ const CreditSection = () => {
                         </ul>
                         <Button
                             className="mt-4 w-full button2"
-                            onClick={() => handlePurchase("Large")}
+
+                            onClick={() => userCtx?.authRedirect(() => handlePurchase("Large"))}
                             disabled={loading === "Large"}
                         >
                             {loading === "Large" ? "Processing..." : "Subscribe now"}

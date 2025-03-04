@@ -14,7 +14,7 @@ export default function GoogleLoginButton() {
         try {
             const token = credentialResponse.credential;
 
-            const response = await fetch("http://localhost:3001/api/auth/google", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include", // Ensure cookies are sent and received

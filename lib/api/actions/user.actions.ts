@@ -2,7 +2,7 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 
-const API_URL = "http://localhost:3001/client";
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/client`;
 
 // Function to get the access token from cookies
 const getAccessToken = () => {

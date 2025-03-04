@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Mail } from "lucide-react";
+import Link from "next/link";
 
 
 const RightArrow = () => {
@@ -55,15 +56,16 @@ const JoinUs = () => {
                 <div className="text-center pl-4 md:text-left">
                     <h2 className="mb-2 text-4xl">Join Us and Grow Your Business</h2>
                     <p className="text-[#525252] text-base md:text-lg">
-                        Lorem ipsum dolor sit amet consectetur. Nulla egestas amet dui
-                        pellentesque et elit.
+                        We are here to help you with your needs. We provide a wide range of services for our customers.
                     </p>
                 </div>
                 <RightArrow />
-                <button className="lg:relative lg:right-9 bg-white text-black px-6 py-3 flex gap-2 rounded-full font-medium hover:bg-gray-200 transition duration-300 shadow-lg ">
+
+                <Link className="lg:relative lg:right-9 bg-white text-black px-6 py-3 flex gap-2 rounded-full font-medium hover:bg-gray-200 transition duration-300 shadow-lg " href={"/api-docs"}>
                     <Mail />
                     Join Us Now For Free
-                </button>
+                </Link>
+
 
             </div>
         </section>

@@ -10,7 +10,7 @@ export const createCheckoutSession = async (
     if (!token) throw new Error("Unauthorized: No token found");
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/checkout/pricing-plan`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/checkout/pricing-plan`,
       {
         method: "POST",
         headers: {
@@ -46,7 +46,7 @@ export const createCreditPurchaseSession = async (
 
     // Call the backend API to create a checkout session
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/checkout/credit-purchase`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/checkout/credit-purchase`,
       {
         method: "POST",
         headers: {

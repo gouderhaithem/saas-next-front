@@ -28,8 +28,7 @@ const Hero2 = () => {
                         <span className="text-purple-600">Services For Customers</span>
                     </h1>
                     <p className="text-gray-600 mt-4">
-                        An enim nullam tempor sapien gravida donec enim ipsum porta justo
-                        congue magna at.
+                        We are here to help you with your needs. We provide services like removing the background of an image, editing the image, and many more.
                     </p>
                     <Button className="mt-6 px-6 py-3 text-lg button2 " onClick={() => userCtx?.authRedirect(() => router.push('/edit/remove-object'))}>Remove the object Now</Button>
                 </div>
@@ -80,15 +79,20 @@ const Hero2 = () => {
 
                         <div className="relative bg-gray-200 rounded-xl overflow-hidden">
                             <Image
-                                src="/images/bags.jpg"
-                                alt="Business"
+                                src="/images/leoparda.webp"
+                                alt="Leopard"
                                 width={200}
                                 height={200}
-                                className="w-full h-full object-cover"
+                                className={`w-full h-full object-cover transition-opacity duration-1000 ${showNoBg ? "opacity-0" : "opacity-100"}`}
                             />
-                            <p className="absolute bottom-2 left-4 text-white font-semibold rotate-[-90deg]">
-                                Business
-                            </p>
+                            <Image
+                                src="/images/leopard.png"
+                                alt="Leopard No BG"
+                                width={200}
+                                height={200}
+                                className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${showNoBg ? "opacity-100" : "opacity-0"}`}
+                            />
+
                         </div>
                     </div>
                 </div>

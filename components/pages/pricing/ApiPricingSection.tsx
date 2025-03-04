@@ -115,7 +115,7 @@ const ApiSubscriptionSection = () => {
                         </ul>
                         <Button
                             className="mt-4 w-full button2"
-                            onClick={() => handleSubscription("Pro")}
+                            onClick={() => userCtx?.authRedirect(() => handleSubscription("Pro"))}
                             disabled={loading === "Pro"}
                         >
                             {loading === "Pro" ? "Processing..." : "Subscribe Now"}
@@ -134,7 +134,8 @@ const ApiSubscriptionSection = () => {
                         </ul>
                         <Button
                             className="mt-4 w-full button2"
-                            onClick={() => handleSubscription("Premium")}
+
+                            onClick={() => userCtx?.authRedirect(() => handleSubscription("Premium"))}
                             disabled={loading === "Premium"}
                         >
                             {loading === "Premium" ? "Processing..." : "Subscribe Now"}

@@ -62,7 +62,7 @@ const ConvertImageToPDF = () => {
 
             const token = getTokenFromCookies();
 
-            const response = await fetch(`http://localhost:3001/client/images/image-to-pdf?layout=${layout}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/client/images/image-to-pdf?layout=${layout}`, {
                 method: "POST",
                 headers: {
                     Authorization: token ? `Bearer ${token}` : "",
