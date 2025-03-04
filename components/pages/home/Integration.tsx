@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Layers, Wrench } from "lucide-react";
 
 const IntegrationSection = () => {
     return (
@@ -8,14 +8,14 @@ const IntegrationSection = () => {
                 {/* Left Side - Illustration */}
                 <div className="relative flex-shrink-0 w-full lg:w-1/2">
                     {/* Icons & Graphics */}
-                    <div className="absolute left-[-20px] top-10 bg-blue-200 rounded-full p-6">
-                        <Image src="/icons/tool-icon.svg" alt="Tool Icon" width={40} height={40} />
+                    <div className="absolute left-[-20px] top-10 bg-blue-200 rounded-full p-6 z-20">
+                        <Wrench />
                     </div>
 
                     {/* Main Image */}
                     <div className="relative z-10">
                         <Image
-                            src="/images/integration-example.png"
+                            src="/images/api.png"
                             alt="Integration Example"
                             width={500}
                             height={300}
@@ -24,8 +24,8 @@ const IntegrationSection = () => {
                     </div>
 
                     {/* Decorative Shapes */}
-                    <div className="absolute right-[-20px] bottom-[-20px] bg-yellow-200 rounded-full p-6">
-                        <Image src="/icons/layer-icon.svg" alt="Layer Icon" width={40} height={40} />
+                    <div className="absolute right-[20px] bottom-[-20px] bg-yellow-200 rounded-full p-6 z-20">
+                        <Layers />
                     </div>
                 </div>
 
@@ -41,8 +41,8 @@ const IntegrationSection = () => {
 
                     {/* Links */}
                     <div className="mt-6 flex flex-col md:flex-row items-center md:items-start gap-4">
-                        <a href="/downloads" className="text-blue-600 flex items-center gap-2 font-medium hover:underline">
-                            All Plugins & Downloads <ArrowRight className="w-5 h-5" />
+                        <a href="/pricing/api-pricing" className="text-blue-600 flex items-center gap-2 font-medium hover:underline">
+                            Start for free <ArrowRight className="w-5 h-5" />
                         </a>
                         <a href="/api-docs" className="text-blue-600 flex items-center gap-2 font-medium hover:underline">
                             API Documentation <ArrowRight className="w-5 h-5" />

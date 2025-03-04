@@ -59,7 +59,7 @@ button:hover {
   padding: 10px 20px;
 }
 .button2:hover {
-  background-color: #7a2cbf;
+  background-color: #b366ff !important;
 }
 @media screen and (max-width: 1080px) {
   .container {

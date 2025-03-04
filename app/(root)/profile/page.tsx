@@ -2,7 +2,7 @@ import ProfileDashboard from '@/components/pages/profile/ProfileDashboard'
 import React from 'react'
 
 
-export default function Profil() {
+export default function Profile() {
     return (
         <div className="relative flex flex-col items-center p-8 space-y-12">
             {/* Half Background */}

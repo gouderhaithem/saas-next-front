@@ -1,10 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import UserContext from "@/context/UserContext";
 
 const Hero2 = () => {
     const [showNoBg, setShowNoBg] = useState(false);
+    const router = useRouter();
+    const userCtx = useContext(UserContext);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -27,7 +31,7 @@ const Hero2 = () => {
                         An enim nullam tempor sapien gravida donec enim ipsum porta justo
                         congue magna at.
                     </p>
-                    <Button className="mt-6 px-6 py-3 text-lg button2 ">Remove the object Now</Button>
+                    <Button className="mt-6 px-6 py-3 text-lg button2 " onClick={() => userCtx?.authRedirect(() => router.push('/edit/remove-object'))}>Remove the object Now</Button>
                 </div>
 
                 {/* Right Content - Image Grid */}

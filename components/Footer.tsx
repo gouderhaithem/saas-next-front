@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 
 import {
@@ -10,11 +11,12 @@ import {
     PhoneCall,
     X,
 } from "lucide-react";
+import Image from "next/image";
 const Footer = () => {
     return (
         <footer className="bg-[#F0F0F0] py-8 px-8 sm:px-20  items-center w-full ">
             <center>
-                Logo
+                <Image src="/logo.png" alt={"logo"} width={200} height={100} />
             </center>
 
             <div className="text-[#2D2C2B] flex justify-between flex-wrap  gap-4 border border-t-black pt-4 mt-4 ">
@@ -30,22 +32,21 @@ Poppins] text-lg text pb-3"
                         <li className="flex items-center gap-4">
                             <span className="mr-2 ">
                                 <PhoneCall
-                                    fill="true"
-                                    className="text-[#2D2C2B]"
-                                    color="#2D2C2B"
+
+
                                 />{" "}
                             </span>{" "}
                             +213 3456 789
                         </li>
                         <li className="flex items-center gap-4">
                             <span className="mr-2">
-                                <Mail fill="true" />
+                                <Mail />
                             </span>{" "}
-                            Lassist@gmail.com
+                            contact@purepix.com
                         </li>
                         <li className="flex items-center gap-4">
                             <span className=" mr-2">
-                                <MapPin fill="true" />
+                                <MapPin />
                             </span>{" "}
                             Algeria
                         </li>
@@ -60,9 +61,9 @@ Poppins] text-lg text pb-3"
                         Company
                     </p>
                     <ul className="text-[#2D2C2B] text-sm flex flex-col gap-4 ">
-                        <li className="">About</li>
-                        <li className="">Contact</li>
-                        <li className="">Service</li>
+                        <li className="cursor-pointer">About</li>
+                        <li className="cursor-pointer">Contact</li>
+                        <li className="cursor-pointer">Service</li>
                     </ul>
                 </div>
                 {/* Legal Section */}

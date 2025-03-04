@@ -56,7 +56,9 @@ export const splitPDF = async (formData: FormData) =>
 // 🔹 Remove Object from Image
 export const removeObject = async (formData: FormData) =>
   uploadFile("/images/remove-object", formData);
-
+// 🔹 Enhance image quality
+export const enhanceQuality = async (formData: FormData) =>
+  uploadFile("/images/restore-image", formData);
 // 🔹 Remove TikTok Watermark
 export const removeTikTokWatermark = async (url: string) => {
   const accessToken = getAccessToken();
@@ -89,6 +91,24 @@ export const removeTikTokWatermark = async (url: string) => {
 export const imageToSVG = async (formData: FormData) =>
   uploadFile("/images/image-to-svg", formData);
 
+//  Function to get the API key
+
+export const getApiKey = async (email: string) => {
+  try {
+    const accessToken = getAccessToken();
+    const response = await axios.post(
+      `${API_URL}/user/api-key`,
+      { email },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Subscription failed:", error);
+    throw new Error("Failed to get api key");
+  }
+};
 /*import axios from "axios";
 
 //const API_URL = "https://saas-express-js.vercel.app/api";

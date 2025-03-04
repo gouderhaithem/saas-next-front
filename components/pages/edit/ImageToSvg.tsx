@@ -1,24 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Upload, X, Loader2, Copy, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { imageToSVG } from "@/lib/api/actions/services.action";
+import UserContext from "@/context/UserContext";
 
 const ImageToSVG = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [svgContent, setSvgContent] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const userCtx = useContext(UserContext);
     const handleFileUpload = (file: File) => {
-        setSelectedFile(file);
+        userCtx?.authRedirect(() => {
+            setSelectedFile(file);
 
-        const reader = new FileReader();
-        reader.onload = (e) => setImagePreview(e.target?.result as string);
-        reader.readAsDataURL(file);
+            const reader = new FileReader();
+            reader.onload = (e) => setImagePreview(e.target?.result as string);
+            reader.readAsDataURL(file);
+        });
     };
+
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
@@ -125,7 +129,7 @@ const ImageToSVG = () => {
                         <Button
                             onClick={handleConvertToSvg}
                             disabled={isLoading}
-                            className="w-full disabled:opacity-50 max-w-xs"
+                            className="w-full disabled:opacity-50 max-w-xs button2"
                         >
                             {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Convert to SVG"}
                         </Button>

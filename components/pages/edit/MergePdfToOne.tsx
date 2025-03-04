@@ -1,19 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
-
+import UserContext from "@/context/UserContext";
 const MergePdf = () => {
     const [files, setFiles] = useState<File[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const userCtx = useContext(UserContext);
 
     const handleFilesUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
-            setFiles((prevFiles) => [...prevFiles, ...Array.from(event.target.files)]);
+            userCtx?.authRedirect(() => {
+                setFiles((prevFiles) => [...prevFiles, ...Array.from(event.target.files)]);
+            });
         }
     };
+
 
     const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();

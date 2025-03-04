@@ -1,11 +1,14 @@
+"use server";
 import axios from "axios";
-
+import { cookies } from "next/headers";
 //const API_URL = "https://saas-express-js.vercel.app/api/auth";
 const API_URL = "http://localhost:3001/api/auth";
+const getAccessToken = () => {
+  return cookies().get("token")?.value;
+};
 
 export const login = async (email: string, password: string) => {
   const response = await axios.post(`${API_URL}/login`, { email, password });
-  console.log(response.data);
 
   return response.data;
 };
@@ -31,11 +34,19 @@ export const verifyEmail = async (token: string) => {
   return response.data;
 };
 
-export const subscribe = async (planId: string, accessToken: string) => {
-  const response = await axios.post(
-    `${API_URL}/subscribe`,
-    { planId },
-    { headers: { Authorization: `Bearer ${accessToken}` } }
-  );
-  return response.data;
+export const subscribeApi = async (email: string) => {
+  try {
+    const accessToken = getAccessToken();
+    const response = await axios.post(
+      `${API_URL}/subscribe`,
+      { email },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Subscription failed:", error);
+    throw new Error("Failed to subscribe to API");
+  }
 };

@@ -64,7 +64,7 @@ const TikTokNoWaterMark = () => {
                 <Button
                     onClick={handleApplyTransformation}
                     disabled={isLoading}
-                    className="w-full disabled:opacity-50 max-w-xs"
+                    className="w-full disabled:opacity-50 max-w-xs button2"
                 >
                     {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Download Video"}
                 </Button>

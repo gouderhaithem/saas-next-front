@@ -51,7 +51,7 @@ const EditPage = async ({ params: { type } }: EditPageProps) => {
 
 
 
-        <div className="p-6 min-h-screen">
+        <div className="p-12 min-h-screen">
             {/* Half Background */}
             <div
                 className="absolute top-0 left-0 w-full h-2/3 bg-no-repeat bg-cover"

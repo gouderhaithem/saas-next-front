@@ -17,7 +17,7 @@ export const createCheckoutSession = async (
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ userEmail, plan }),
+        body: JSON.stringify({ email: userEmail, plan }),
       }
     );
 

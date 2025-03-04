@@ -1,10 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Upload, X, Loader2, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-const sampleImages = ["/images/cat.webp", "/images/women.png", "/images/bird.webp"];
+import UserContext from "@/context/UserContext";
+// const sampleImages = ["/images/cat.webp", "/images/women.png", "/images/bird.webp"];    
 
 const ConvertImageToPDF = () => {
     const [imageFile, setImageFile] = useState<File | null>(null);
@@ -12,14 +12,18 @@ const ConvertImageToPDF = () => {
     const [layout, setLayout] = useState<"portrait" | "landscape">("portrait");
     const [isLoading, setIsLoading] = useState(false);
     const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+    const userCtx = useContext(UserContext);
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setImageFile(file);
-            setPreviewImage(URL.createObjectURL(file));
+            userCtx?.authRedirect(() => {
+                const file = event.target.files[0];
+                setImageFile(file);
+                setPreviewImage(URL.createObjectURL(file));
+            });
         }
     };
+
 
     const handleSampleImageSelect = async (src: string) => {
         try {
@@ -100,17 +104,7 @@ const ConvertImageToPDF = () => {
                         </label>
                         <input type="file" id="upload" accept="image/*" className="hidden" onChange={handleImageUpload} />
                         <p className="text-gray-600">Or choose a sample image:</p>
-                        <div className="flex space-x-4">
-                            {sampleImages.map((src, index) => (
-                                <img
-                                    key={index}
-                                    src={src}
-                                    alt={`Sample ${index + 1}`}
-                                    className="w-20 h-20 rounded-lg cursor-pointer shadow-md hover:scale-105 transition"
-                                    onClick={() => handleSampleImageSelect(src)}
-                                />
-                            ))}
-                        </div>
+
                     </>
                 ) : (
                     <div className="flex flex-col items-center space-y-4 w-full">

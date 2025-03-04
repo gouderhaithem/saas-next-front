@@ -1,19 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Upload, X, Loader2, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { splitPDF } from "@/lib/api/actions/services.action";
+import UserContext from "@/context/UserContext";
 
 const SplitPdf = () => {
     const [pdfFile, setPdfFile] = useState<File | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [splitPages, setSplitPages] = useState<{ page: number; url: string }[]>([]);
+    const userCtx = useContext(UserContext);
 
     const handlePdfUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            setPdfFile(event.target.files[0]);
+            if (event.target.files) {
+                userCtx?.authRedirect(() => setPdfFile(event.target.files![0]));
+            }
         }
     };
 
@@ -24,7 +28,7 @@ const SplitPdf = () => {
     const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
         if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-            setPdfFile(event.dataTransfer.files[0]);
+            userCtx?.authRedirect(() => setPdfFile(event.dataTransfer.files[0]));
         }
     };
 
@@ -66,7 +70,8 @@ const SplitPdf = () => {
     };
 
     return (
-        <Card className="max-w-2xl mx-auto p-6 shadow-lg relative">
+
+        <Card className="max-w-2xl mx-auto p-6 shadow-lg relative ">
             <CardHeader>
                 <CardTitle className="text-center">Split your PDF into Multiple Files</CardTitle>
             </CardHeader>
@@ -78,6 +83,10 @@ const SplitPdf = () => {
                             htmlFor="upload-pdf"
                             onDragOver={handleDragOver}
                             onDrop={handleDrop}
+
+
+
+
                         >
                             <Upload className="w-10 h-10 text-gray-500" />
                             <span className="text-gray-500">Upload or Drag your PDF file</span>
@@ -87,7 +96,9 @@ const SplitPdf = () => {
                             id="upload-pdf"
                             accept="application/pdf"
                             className="hidden"
+
                             onChange={handlePdfUpload}
+
                         />
                     </>
                 ) : (
@@ -136,6 +147,7 @@ const SplitPdf = () => {
                 )}
             </CardContent>
         </Card>
+
     );
 };
 

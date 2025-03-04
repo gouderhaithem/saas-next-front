@@ -18,30 +18,35 @@ const RemoveBg = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isTransformed, setIsTransformed] = useState(false);
+    const userCtx = useContext(UserContext);
 
-    const { token } = useContext(UserContext) || {};
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setSelectedFile(file);
-            setIsTransformed(false);
+            userCtx?.authRedirect(() => {
+                const file = event.target.files[0];
+                setSelectedFile(file);
+                setIsTransformed(false);
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                if (e.target) setImage(e.target.result as string);
-            };
-            reader.readAsDataURL(file);
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    if (e.target) setImage(e.target.result as string);
+                };
+                reader.readAsDataURL(file);
+            });
         }
     };
 
+
+
     const handleApplyTransformation = async () => {
-        if (!selectedFile || !token) return;
+
 
         setIsLoading(true);
         try {
-            const processedData = await removeBg(selectedFile, token, "2dc25d79c791fb0b6c486a5b3aabb1d95975ec324325a014ee90caa559d71787");
-            setProcessedImage(processedData.url);
+            const processedData = console.log("Coming soon");
+            ;
+            setProcessedImage(processedData);
             setIsTransformed(true);
         } catch (error) {
             console.error("Error processing image:", error);
@@ -57,12 +62,15 @@ const RemoveBg = () => {
     };
 
     return (
-        <Card className="max-w-2xl mx-auto p-6 shadow-lg relative">
-            <CardHeader>
-                <CardTitle className="text-center">Remove Background using AI now</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center space-y-6">
-                {!image ? (
+        <div className="mb-14">
+            <Card className="max-w-2xl mx-auto p-6 shadow-lg relative">
+                <CardHeader>
+                    <CardTitle className="text-center">Remove Background using AI now</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col items-center space-y-6">
+
+                    <h2>Coming soon </h2>
+                    {/* {!image ? (
                     <>
                         <label
                             className="border-2 border-dashed border-gray-300 p-6 rounded-lg cursor-pointer flex flex-col items-center text-center w-full"
@@ -126,9 +134,10 @@ const RemoveBg = () => {
                             </a>
                         )}
                     </div>
-                )}
-            </CardContent>
-        </Card>
+                )}*/}
+                </CardContent>
+            </Card>
+        </div>
     );
 };
 

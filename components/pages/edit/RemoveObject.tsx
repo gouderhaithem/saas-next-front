@@ -1,16 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Upload, X, Loader2, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { removeObject } from "@/lib/api/actions/services.action";
+import UserContext from "@/context/UserContext";
 
-const sampleImages = [
+/*const sampleImages = [
     "/images/cat.webp",
     "/images/women.png",
     "/images/bird.webp",
-];
+]; */
 
 const RemoveObject = () => {
     const [image, setImage] = useState<string | null>(null);
@@ -18,21 +20,23 @@ const RemoveObject = () => {
     const [objectToRemove, setObjectToRemove] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [transformedImage, setTransformedImage] = useState<string | null>(null);
-
-    const accessToken = "your_access_token"; // Replace with actual token
-    const apiKey = "49a498db13a09edae7d7d980c8eece4523a4dc8893a717b56fa42aac43d948a3";
+    const userCtx = useContext(UserContext);
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setImageFile(file);
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                if (e.target) setImage(e.target.result as string);
-            };
-            reader.readAsDataURL(file);
+            userCtx?.authRedirect(() => {
+                const file = event.target.files[0];
+                setImageFile(file);
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    if (e.target) setImage(e.target.result as string);
+                };
+                reader.readAsDataURL(file);
+            });
         }
     };
+
 
     const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault();
@@ -57,7 +61,11 @@ const RemoveObject = () => {
         setIsLoading(true);
 
         try {
-            const response = await removeObject(imageFile, objectToRemove, accessToken, apiKey);
+            const formData = new FormData();
+            formData.append("file", imageFile);
+            formData.append("objectName", objectToRemove);
+            const response = await removeObject(formData);
+
             setTransformedImage(response.url);
         } catch (error) {
             console.error("Error removing object:", error);
@@ -90,7 +98,6 @@ const RemoveObject = () => {
         }
     };
 
-
     return (
         <Card className="max-w-2xl mx-auto p-6 shadow-lg relative">
             <CardHeader>
@@ -116,17 +123,7 @@ const RemoveObject = () => {
                             onChange={handleImageUpload}
                         />
                         <p className="text-gray-600">or choose one of these:</p>
-                        <div className="flex space-x-4">
-                            {sampleImages.map((src, index) => (
-                                <img
-                                    key={index}
-                                    src={src}
-                                    alt={`Sample ${index + 1}`}
-                                    className="w-20 h-20 rounded-lg cursor-pointer shadow-md hover:scale-105 transition"
-                                    onClick={() => setImage(src)}
-                                />
-                            ))}
-                        </div>
+
                     </>
                 ) : (
                     <div className="flex flex-col items-center space-y-4 w-full">
@@ -157,7 +154,7 @@ const RemoveObject = () => {
                         </Button>
 
                         {transformedImage && (
-                            <Button onClick={handleDownloadImage} className="w-full  max-w-xs">
+                            <Button onClick={handleDownloadImage} className="w-full max-w-xs">
                                 <Download className="w-4 h-4" /> Download Image
                             </Button>
                         )}

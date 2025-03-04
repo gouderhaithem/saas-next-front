@@ -1,26 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
+import UserContext from "@/context/UserContext";
 
 
 const PdfToImg = () => {
     const [image, setImage] = useState<string | null>(null);
-
+    const userCtx = useContext(UserContext);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                if (e.target) setImage(e.target.result as string);
-            };
-            reader.readAsDataURL(file);
+            userCtx?.authRedirect(() => {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    if (e.target) setImage(e.target.result as string);
+                };
+                reader.readAsDataURL(file);
+            });
         }
     };
+
 
     const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
         event.preventDefault(); // Prevent default behavior
